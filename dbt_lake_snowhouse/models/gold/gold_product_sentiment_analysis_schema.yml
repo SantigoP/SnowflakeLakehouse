@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: gold_category_review_analysis
+    description: "This table aggregates review data by product category, providing insights into the number of reviews and average ratings. It's useful for understanding customer feedback trends across different product categories."
+    columns:
+      - name: Category
+        description: "The category of the product. Used as a key for aggregating review data."
+        tests:
+          - not_null
+          - unique
+
+      - name: NumberOfReviews
+        description: "The total number of reviews for products in each category. This metric helps in understanding the volume of feedback per category."
+        tests:
+          - not_null
+
+      - name: AverageRating
+        description: "The average rating of products within a category, calculated across all reviews. It indicates overall customer satisfaction within each product category."
+        tests:
+          - not_null

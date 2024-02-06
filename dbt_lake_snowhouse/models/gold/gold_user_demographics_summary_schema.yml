@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: gold_user_demographics_summary
+    description: "This table provides a summarized view of user demographics, focusing on the geographical distribution of users and their engagement with the platform. It's instrumental in understanding user base distribution and activity patterns."
+    columns:
+      - name: Location
+        description: "The geographical location of users. Used to aggregate demographic data."
+        tests:
+          - not_null
+          - unique
+
+      - name: UserCount
+        description: "The total number of users from each geographical location. This metric is key to understanding the distribution of the user base."
+        tests:
+          - not_null
+
+      - name: AverageDaysSinceJoining
+        description: "The average number of days since users in each location joined the platform. It provides insights into user engagement and platform growth within different regions."
+        tests:
+          - not_null

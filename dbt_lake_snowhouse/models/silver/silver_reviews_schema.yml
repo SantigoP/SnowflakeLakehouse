@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: silver_reviews
+    description: "This table stores individual reviews submitted by users at the silver layer, with additional transformations and calculations for deeper insights. Each record represents a single review of a product, providing valuable insights into user opinions and experiences."
+    columns:
+      - name: ReviewID
+        description: "Part of the unique composite identifier of the review."
+        tests:
+          - not_null
+
+      - name: UserID
+        description: "Part of the unique composite identifier of the review. Identifier of the user who wrote the review."
+        tests:
+          - dbt_utils.relationships_where:
+              to: ref('silver_users')
+              field: UserID
+          - not_null
+
+      - name: ProductID
+        description: "Part of the unique composite identifier of the review. Identifier of the reviewed product."
+        tests:
+          - dbt_utils.relationships_where:
+              to: ref('silver_products')
+              field: ProductID
+          - not_null
+
+      - name: Timestamp
+        description: "Date and time when the review was posted."
+        tests:
+          - not_null
+
+      - name: Rating
+        description: "Product rating by the user, typically ranging from 1 to 5."
+        tests:
+          - not_null
+
+      - name: ReviewText
+        description: "Text of the review provided by the user."
+        tests:
+          - not_null
+
+      - name: DaysSinceReview
+        description: "Calculated field representing the number of days since the review was posted."
+        tests:
+          - not_null
+
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - ReviewID
+            - UserID
+            - ProductID

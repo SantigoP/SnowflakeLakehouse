@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: silver_users
+    description: "The Users table in the silver layer includes enhanced information about users who have submitted reviews. It extends the base user data with additional calculated fields such as DaysSinceJoining for more in-depth demographic analysis and understanding of the user base."
+    columns:
+      - name: UserID
+        description: "Unique identifier of the user."
+        tests:
+          - unique
+          - not_null
+
+      - name: UserName
+        description: "Name or alias of the user. This field reflects the user's name after any necessary cleansing or standardization in the bronze layer."
+        tests:
+          - not_null
+
+      - name: Location
+        description: "Geographical location of the user. The location data is standardized in the bronze layer for consistency."
+        tests:
+          - not_null
+
+      - name: JoinDate
+        description: "Date when the user joined the platform."
+        tests:
+          - not_null
+
+      - name: DaysSinceJoining
+        description: "Calculated number of days since the user joined the platform, providing insights into user tenure and engagement."
+        tests:
+          - not_null

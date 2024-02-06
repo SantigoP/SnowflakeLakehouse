@@ -1,1 +1,1 @@
- select * from {{ source('SOURCE', 'Products') }}
+ select * from {{ source('SOURCES', 'Products') }}

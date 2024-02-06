@@ -3,13 +3,13 @@
 version: 2
 
 sources:
-  - name: SOURCE
+  - name: SOURCES
     quoting:
       database: false
       schema: false
       identifier: false
     database: DBT_DEMO_TEST_DEVELOP
-    schema: LAKESNOWHOUSE
+    schema: SOURCES
 
     tables:
       - name: Users

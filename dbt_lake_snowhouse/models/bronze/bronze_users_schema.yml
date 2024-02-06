@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: bronze_users
+    description: "The Users table holds information about users who have submitted reviews. It includes details such as the user's name, geographical location, and the date they joined the platform. This table is crucial for user demographic analysis and understanding the user base."
+    columns:
+      - name: UserID
+        description: "Unique identifier of the user."
+        tests:
+          - unique
+          - not_null
+
+      - name: UserName
+        description: "Name or alias of the user."
+        tests:
+          - not_null
+
+      - name: Location
+        description: "Geographical location of the user."
+        tests:
+          - not_null
+
+      - name: JoinDate
+        description: "Date when the user joined the platform."
+        tests:
+          - not_null
