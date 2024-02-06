@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: silver_products
+    description: "This table contains enriched details about the products that are reviewed by users, including calculated fields like cost and margin. It serves as a foundation for product-based analysis, inventory management, and sales strategy formulation in the silver layer."
+    columns:
+      - name: ProductID
+        description: "Unique identifier of the product."
+        tests:
+          - unique
+          - not_null
+
+      - name: ProductName
+        description: "Name of the product. Reflects the product's name after cleansing and standardization in the bronze layer."
+        tests:
+          - not_null
+
+      - name: Category
+        description: "Category of the product. Categories are normalized and standardized in the bronze layer."
+        tests:
+          - not_null
+
+      - name: Price
+        description: "Current price of the product. This field represents the product's listed price."
+        tests:
+          - not_null
+          - dbt_utils.at_least_one:
+              where: "Price < 0"
+              config:
+                severity: warn
+
+      - name: Cost
+        description: "Calculated cost of the product, typically representing the base cost to the company."
+        tests:
+          - not_null
+
+      - name: Margin
+        description: "Calculated margin for the product, representing the difference between price and cost."
+        tests:
+          - not_null

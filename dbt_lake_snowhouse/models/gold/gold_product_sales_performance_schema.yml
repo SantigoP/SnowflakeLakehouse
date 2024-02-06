@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: gold_product_sales_performance
+    description: "This table provides an aggregated view of product sales performance, focusing on average price and margin by category. It is designed for in-depth analysis of product profitability and category-wise sales trends."
+    columns:
+      - name: Category
+        description: "The category of the product. This field is used to aggregate data and analyze performance by product category."
+        tests:
+          - not_null
+          - unique
+
+      - name: AveragePrice
+        description: "The average price of products within a given category. This metric provides insights into the pricing strategy and positioning of products in the market."
+        tests:
+          - not_null
+
+      - name: AverageMargin
+        description: "The average margin of products within a category, calculated as the difference between price and cost. It serves as an indicator of profitability for different product categories."
+        tests:
+          - not_null

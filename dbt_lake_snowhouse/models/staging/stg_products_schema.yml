@@ -1,0 +1,28 @@
+# ************************** SqlDBM: Snowflake *************************
+
+version: 2
+
+models:
+  - name: stg_products
+    description: This table contains details about the products that are reviewed by users. It includes product names, categories, and pricing information. The Products table is essential for product-based analysis, inventory management, and sales strategy formulation.
+    columns:
+      - name: ProductID
+        description: Unique identifier of the product.
+        tests:
+          - unique
+          - not_null
+
+      - name: ProductName
+        description: Name of the product.
+        tests:
+          - not_null
+
+      - name: Category
+        description: Category of the product.
+        tests:
+          - not_null
+
+      - name: Price
+        description: Price of the product.
+        tests:
+          - not_null

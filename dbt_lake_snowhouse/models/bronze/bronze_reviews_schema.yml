@@ -1,0 +1,50 @@
+
+version: 2
+
+models:
+  - name: bronze_reviews
+    description: "This table stores individual reviews submitted by users. Each record represents a single review of a product, providing insights into user opinions and experiences. It's a key resource for understanding customer satisfaction and product performance."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - UserID
+            - ProductID
+            - ReviewID
+
+    columns:
+      - name: ReviewID
+        description: "Unique identifier of the review."
+        tests:
+          - not_null
+
+      - name: UserID
+        description: "Identifier of the user who wrote the review."
+        tests:
+          - not_null
+          - dbt_utils.relationships_where:
+              to: ref('bronze_users')
+              field: UserID
+
+      - name: ProductID
+        description: "Identifier of the reviewed product."
+        tests:
+          - not_null
+          - dbt_utils.relationships_where:
+              to: ref('bronze_products')
+              field: ProductID
+
+      - name: Timestamp
+        description: "Date and time when the review was posted."
+        tests:
+          - not_null
+
+      - name: Rating
+        description: "Product rating by the user, for example, from 1 to 5."
+        tests:
+          - not_null
+
+      - name: ReviewText
+        description: "Text of the review."
+        tests:
+          - not_null
+
